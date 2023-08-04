@@ -1,37 +1,3 @@
-# Solidity Template
-A lightweight template for developing smart contracts in Solidity.
+# Ballot App
 
-
-## Major Plugins 
-- `ethers`
-- `hardhat`
-- `@nomicfoundation/hardhat-chai-matchers`
-- `@nomicfoundation/hardhat-toolbox`
-
-
-## Install Dependencies
-
-`yarn`
-
-## Update .env
-
-`cp .env.template .env`
-
-## Compile contracts
-
-`yarn compile`
-
-## Deploy contracts
-
-`npx hardhat deploy --tags <TAGS> --network <NETWORK>`
-
-## Verify Contract
-
-`npx hardhat --network <NETWORK> etherscan-verify`
-## Run tests
-
-```bash
-yarn test [FILE_PATH]
-yarn test:parallel [FILE_PATH] # parallel mode
-yarn test:bali [FILE_PATH] # bali mode
-```
+Contract Address: [0x003343f128839fe6253Ab3E15265aA60E8114DeF](https://sepolia.etherscan.io/address/0x003343f128839fe6253ab3e15265aa60e8114def)
