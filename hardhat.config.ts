@@ -7,6 +7,7 @@ import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
 import 'hardhat-contract-sizer'
 import 'solidity-coverage'
+import './tasks/tasks.index'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -88,9 +89,8 @@ const config: HardhatUserConfig = {
       gasPrice: 5000000000,
     },
     sepolia: {
-      url: 'https://rpc.notadegen.com/sepolia',
+      url: 'https://ethereum-sepolia.blockpi.network/v1/rpc/public',
       chainId: 11155111,
-      gasPrice: 5000000000,
     },
   },
 }
