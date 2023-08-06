@@ -8,7 +8,7 @@ import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
 import 'hardhat-contract-sizer'
 import 'solidity-coverage'
-import './tasks'
+import './tasks/tasks.index'
 
 import dotenv from 'dotenv'
 

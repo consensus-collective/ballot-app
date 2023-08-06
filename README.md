@@ -44,3 +44,21 @@ Contract Address: [0x003343f128839fe6253Ab3E15265aA60E8114DeF](https://sepolia.e
 
 - The **voter** gives another vote again to `proposal[1]`, but **rejected** since the voter alredy voted ([0x5f69537f1b097c17a08f08003719b33d9aafafcdd42bdd81a113d647cad4f783](https://sepolia.etherscan.io/tx/0x5f69537f1b097c17a08f08003719b33d9aafafcdd42bdd81a113d647cad4f783)).
   ![0x5f69537f1b097c17a08f08003719b33d9aafafcdd42bdd81a113d647cad4f783](./assets/another-vote.png)
+
+## Scripts
+
+- `giveRight [--network] [--name] [--voter] [--path]`
+
+  - network: network alias from `hardhat.config.ts`
+  - name: custom contract name for `hre.deployments.get()`. We input `Ballot2` here for our improved version. _default: Ballot_
+  - voter: list of addresses. e.g. `  $ npx hardhat giveRight --network sepolia $RANDOM_ADDRESS1 $RANDOM_ADDRESS2`
+
+  - path: file path of JSON file.
+
+    e.g. `npx hardhat giveRight --network sepolia --name Ballot2 --path constants/address.json`
+
+- `vote --contract <CONTRACT_ADDRESS> --signer <SIGNER> --proposal <PROPOSAL_ID>`
+
+- `winning-proposal --contract <CONTRACT_ADDRESS>`
+- demo of all scripts:
+  [here](docs/SCRIPTS.md)
