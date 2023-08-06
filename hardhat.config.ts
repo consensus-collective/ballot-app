@@ -8,7 +8,7 @@ import 'hardhat-gas-reporter'
 import 'hardhat-contract-sizer'
 import 'solidity-coverage'
 import dotenv from 'dotenv'
-import { accounts, winningProposal } from './tasks'
+import { accounts, vote, winningProposal } from './tasks'
 
 dotenv.config()
 
@@ -123,6 +123,12 @@ config.gasReporter = {
 }
 
 task('accounts', 'Get account list').setAction(accounts)
+
+task('vote', 'Give vote')
+  .addParam('contract', 'Ballot contract address')
+  .addParam('signer', 'Signer public address')
+  .addParam('proposal', 'Proposal index')
+  .setAction(vote)
 
 task('winning-proposal', 'Give the name of the winner and total vote')
   .addParam('contract', 'Ballot contract address')
