@@ -1,4 +1,5 @@
 import { HardhatUserConfig } from 'hardhat/config'
+
 import '@nomicfoundation/hardhat-ethers'
 import '@nomicfoundation/hardhat-toolbox'
 import '@nomicfoundation/hardhat-chai-matchers'
@@ -7,7 +8,8 @@ import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
 import 'hardhat-contract-sizer'
 import 'solidity-coverage'
-import './tasks/tasks.index'
+import './tasks'
+
 import dotenv from 'dotenv'
 
 dotenv.config()
