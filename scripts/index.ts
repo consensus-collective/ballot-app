@@ -9,3 +9,14 @@ export async function giveRight(contractAddress: string, hre: HardhatRuntimeEnvi
 
   return txn
 }
+
+export async function giveRights(contractAddress: string, hre: HardhatRuntimeEnvironment, voters: string[]) {
+  const [signer] = await hre.ethers.getSigners()
+  const contract = await hre.ethers.getContractAt('Ballot2', contractAddress, signer)
+  const voterAddress = voters.map((voter) => hre.ethers.getAddress(voter))
+
+  const txn = await contract.giveRightToVotes(voterAddress)
+  await txn.wait()
+
+  return txn
+}
