@@ -2,6 +2,22 @@
 
 Contract Address: [0x003343f128839fe6253Ab3E15265aA60E8114DeF](https://sepolia.etherscan.io/address/0x003343f128839fe6253ab3e15265aa60e8114def)
 
+### Give right to vote
+``Chairman Address``: [0x33Cb9c62131915C86DFfCb5C853379865Ae7379d](https://sepolia.etherscan.io/address/0x33Cb9c62131915C86DFfCb5C853379865Ae7379d)
+``Fake Chairman Address``/``Voter 2 Address``: [0xD22C7a03d8a7f55916A1DF0ae3840B82B46216ae](https://sepolia.etherscan.io/tx/0x43a1556a19a7eccb53a006e8d6e9c9c58b5e602f550bbc48c733eb1a065abb3d)
+``Voter 1 Address``: [0xd22c7a03d8a7f55916a1df0ae3840b82b46216ae](https://sepolia.etherscan.io/address/0xd22c7a03d8a7f55916a1df0ae3840b82b46216ae)
+
+___
+
+- An attacker (**the fake chairman**) trying to give the **voter 1** a right to vote, but **rejected** because only the chairman that has a right ([0x9836a381fc6494c13513ec15cfce1f0ac2f3db7da885bc0405cb29f2d3fc2291](https://sepolia.etherscan.io/tx/0x9836a381fc6494c13513ec15cfce1f0ac2f3db7da885bc0405cb29f2d3fc2291)). 
+![0x9836a381fc6494c13513ec15cfce1f0ac2f3db7da885bc0405cb29f2d3fc2291](./assets/failed-vote-right.png)
+
+- The **chairman** gives the **voter 1** a right to vote, but **rejected** because the **voter 1** already has a right to vote and voted. ([0xc1b68eb3265f20c4b5ec95401fdc213f58f6dff276ebe2b8f4dccfc75a10f81b](https://sepolia.etherscan.io/tx/0xc1b68eb3265f20c4b5ec95401fdc213f58f6dff276ebe2b8f4dccfc75a10f81b)).
+![0xc1b68eb3265f20c4b5ec95401fdc213f58f6dff276ebe2b8f4dccfc75a10f81b](./assets/already-voted.png)
+
+- The **chairman** gives the **voter 2** a right to vote, but **rejected** because **the voter 2** already has a right to vote. 
+([0x3e021b318813c5f83f8066b356dc80751b053db368a0e263a57d797ea499e00f](https://sepolia.etherscan.io/tx/0x3e021b318813c5f83f8066b356dc80751b053db368a0e263a57d797ea499e00f)).
+![0x3e021b318813c5f83f8066b356dc80751b053db368a0e263a57d797ea499e00f](./assets/already-voted-2.png)
 
 ### Vote
 ``Chairman Address``: [0x33Cb9c62131915C86DFfCb5C853379865Ae7379d](https://sepolia.etherscan.io/address/0x33Cb9c62131915C86DFfCb5C853379865Ae7379d)
