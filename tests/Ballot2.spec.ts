@@ -39,6 +39,9 @@ describe('Ballot2', function () {
         expect((await ballotContract.proposals(idx))[0]).to.equal(proposal)
       }
     })
+    it('shd return correct number of proposals', async function () {
+      expect(await ballotContract.proposalCount()).to.equal(proposals.length)
+    })
   })
 
   describe('[event]', function () {
@@ -71,6 +74,42 @@ describe('Ballot2', function () {
 
       // sender: user1, to: user0
       await expect(receipt).to.emit(ballotContract, 'Delegate').withArgs(users[1].address, users[0].address)
+    })
+  })
+
+  describe('[voteRights]', function () {
+    it('shd be able to mass give right', async function () {
+      const userArr = users.slice(0, 3).map((user) => user.address)
+      const res = await ballotContract.connect(owner).giveRightToVotes(userArr)
+      const receipt = await res.wait()
+      for (const user of userArr) {
+        // check weight
+        expect((await ballotContract.voters(user)).weight).to.equal(1)
+        // shd emit `GiveVoteRight` 3 times
+        await expect(res).to.emit(ballotContract, 'GiveVoteRight').withArgs(user)
+      }
+
+      // should emit 3 events
+      await expect(receipt?.logs.length).to.equal(userArr.length)
+    })
+
+    it('shd works with duplicated address', async function () {
+      const duplicatedArr = [users[0].address, users[0].address, users[0].address]
+      const res = await ballotContract.connect(owner).giveRightToVotes(duplicatedArr)
+      const recipet = await res.wait()
+      for (const user of duplicatedArr) {
+        expect((await ballotContract.voters(user)).weight).to.equal(1)
+      }
+
+      // shd only emit once
+      expect(recipet?.logs.length).to.eq(1)
+    })
+
+    it('shd revert if caller is not chairperson', async function () {
+      const userArr = users.slice(0, 3).map((user) => user.address)
+      await expect(ballotContract.connect(users[2]).giveRightToVotes(userArr)).to.revertedWith(
+        'Only chairperson can give right to vote.',
+      )
     })
   })
 })

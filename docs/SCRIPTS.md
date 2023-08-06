@@ -47,6 +47,29 @@ Voting...
 Successfully voted...
 ```
 
+### `votingStatus`
+
+`votingStatus --contract <CONTRACT>`
+
+```bash
+$ npx hardhat votingStatus --network sepolia
+
+┌─────────┬─────────────┬───────┐
+│ (index) │    name     │ votes │
+├─────────┼─────────────┼───────┤
+│    0    │ 'Proposal0' │  '0'  │
+│    1    │ 'Proposal1' │  '1'  │
+│    2    │ 'Proposal2' │  '0'  │
+│    3    │ 'Proposal3' │  '0'  │
+│    4    │ 'Proposal4' │  '0'  │
+│    5    │ 'Proposal5' │  '0'  │
+│    6    │ 'Proposal6' │  '0'  │
+│    7    │ 'Proposal7' │  '0'  │
+│    8    │ 'Proposal8' │  '0'  │
+│    9    │ 'Proposal9' │  '0'  │
+└─────────┴─────────────┴───────┘
+```
+
 ### `winning-proposal`
 
 `winning-proposal --contract <CONTRACT>`

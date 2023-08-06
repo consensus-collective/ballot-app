@@ -1,10 +1,10 @@
 import { task } from 'hardhat/config'
 import { vote } from '../scripts/vote'
-import { winningProposal } from '../scripts/query'
+import { getProposals, winningProposal } from '../scripts/query'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
 import { readFile } from '../utils/file'
 import { ethers } from 'ethers'
-import { giveRight } from '../scripts'
+import { giveRights } from '../scripts'
 import { getDeployments } from '../scripts/utils'
 import log from '../utils/log'
 
@@ -17,6 +17,18 @@ task('vote', 'Give vote')
 task('winning-proposal', 'Give the name of the winner and total vote')
   .addParam('contract', 'Ballot contract address')
   .setAction(winningProposal)
+
+task('votingStatus', 'print voting status')
+  .addOptionalParam('contract', 'Ballet contract address')
+  .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
+    const contractAddress = taskArgs.contract ?? (await getDeployments(hre, taskArgs.name ?? 'Ballot2'))
+
+    if (!contractAddress || !ethers.isAddress(contractAddress)) {
+      log.error(`Invalid contract address`)
+      return
+    }
+    await getProposals(contractAddress, hre)
+  })
 
 task('giveRight', 'give voting right to a specific address')
   .addOptionalParam('contract', 'Ballet contract address')
@@ -48,7 +60,9 @@ task('giveRight', 'give voting right to a specific address')
       const addressList: string[] = []
 
       JSON.parse(addressJson).map((address: string) => {
-        addressList.push(address)
+        if (ethers.isAddress(address)) {
+          addressList.push(address)
+        }
       })
       addressToGrant = addressList
     }
@@ -57,16 +71,7 @@ task('giveRight', 'give voting right to a specific address')
       log.error('File path or address not found')
       return
     }
+    const receipt = await giveRights(contractAddress, hre, addressToGrant)
 
-    for (const i of addressToGrant) {
-      if (!ethers.isAddress(i)) {
-        log.error(`${i} is not a valid address`)
-        continue
-      }
-
-      const receipt = await giveRight(contractAddress, hre, i)
-
-      // // log changes
-      log.debug(`Granted voting right for ${i} \nBallot Contract: ${contractAddress} \ntxHash: ${receipt.hash}\n`)
-    }
+    log.debug(`Granted voting right for ${addressToGrant} \ntxHash: ${receipt.hash}`)
   })

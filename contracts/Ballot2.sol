@@ -79,6 +79,18 @@ contract Ballot2 {
         emit GiveVoteRight(voter);
     }
 
+    function giveRightToVotes(address[] calldata _voters) external {
+        require( msg.sender == chairperson, "Only chairperson can give right to vote.");
+
+        for (uint i; i < _voters.length; ++i){
+            address newVoter = _voters[i];
+            if (!voters[newVoter].voted && voters[newVoter].weight == 0){
+                voters[newVoter].weight = 1;
+                emit GiveVoteRight(newVoter); 
+            }
+        }
+    }
+
     /// Delegate your vote to the voter `to`.
     function delegate(address to) external {
         // assigns reference
@@ -164,4 +176,10 @@ contract Ballot2 {
     {
         winnerName_ = proposals[winningProposal()].name;
     }
+
+    // return total number of proposals
+    function proposalCount() external view returns (uint count){
+        count = proposals.length;
+    }
+
 }
