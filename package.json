@@ -6,14 +6,6 @@
   "publishConfig": {
     "access": "public"
   },
-  "keywords": [
-    "solidity",
-    "defi"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ruggedev/simple-solidity-template"
-  },
   "engines": {
     "node": ">=14"
   },
@@ -32,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.0",
     "@typescript-eslint/parser": "^6.2.0",
     "chai": "^4.3.7",
+    "chalk": "4.1.2",
     "dotenv": "^16.3.1",
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.3.0",
@@ -52,6 +45,7 @@
     "compile": "hardhat compile",
     "pretest": "yarn compile",
     "test": "hardhat test",
+    "format": "prettier --write .",
     "test:parallel": "hardhat test --parallel",
     "test:bail": "hardhat test --bail --parallel",
     "size": "hardhat size-contracts",
