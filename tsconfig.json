@@ -9,6 +9,6 @@
     "skipLibCheck": true
   },
   "exclude": ["dist", "node_modules"],
-  "include": ["./test", "./scripts", "./deploy", "./tasks", "./utils"],
+  "include": ["./tests", "./scripts", "./deploy", "./tasks", "./utils"],
   "files": ["./hardhat.config.ts"]
 }
