@@ -1,6 +1,6 @@
 import { task } from 'hardhat/config'
 import { vote } from '../scripts/vote'
-import { getProposals, winningProposal } from '../scripts/query'
+import { getProposals, getWinningProposal } from '../scripts/query'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
 import { readFile } from '../utils/file'
 import { ethers } from 'ethers'
@@ -16,7 +16,15 @@ task('vote', 'Give vote')
 
 task('winning-proposal', 'Give the name of the winner and total vote')
   .addParam('contract', 'Ballot contract address')
-  .setAction(winningProposal)
+  .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
+    const winningProposal = await getWinningProposal(taskArgs, hre)
+    if (!winningProposal) {
+      log.error('Winning proposal not found')
+      return
+    }
+    log.info('Winner:', winningProposal.winner)
+    log.info('Total Count:', winningProposal.count.toString())
+  })
 
 task('votingStatus', 'print voting status')
   .addOptionalParam('contract', 'Ballet contract address')
@@ -27,7 +35,8 @@ task('votingStatus', 'print voting status')
       log.error(`Invalid contract address`)
       return
     }
-    await getProposals(contractAddress, hre)
+    const proposalsDict = await getProposals(contractAddress, hre)
+    console.table(proposalsDict)
   })
 
 task('giveRight', 'give voting right to a specific address')
