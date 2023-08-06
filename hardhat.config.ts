@@ -1,4 +1,5 @@
-import { HardhatUserConfig, task } from 'hardhat/config'
+import { HardhatUserConfig } from 'hardhat/config'
+
 import '@nomicfoundation/hardhat-ethers'
 import '@nomicfoundation/hardhat-toolbox'
 import '@nomicfoundation/hardhat-chai-matchers'
@@ -7,8 +8,9 @@ import 'hardhat-deploy'
 import 'hardhat-gas-reporter'
 import 'hardhat-contract-sizer'
 import 'solidity-coverage'
+import './tasks'
+
 import dotenv from 'dotenv'
-import { accounts, vote, winningProposal } from './tasks'
 
 dotenv.config()
 
@@ -121,17 +123,5 @@ if (process.env.ACCOUNT_PRIVATE_KEYS) {
 config.gasReporter = {
   enabled: process.env.REPORT_GAS ? true : false,
 }
-
-task('accounts', 'Get account list').setAction(accounts)
-
-task('vote', 'Give vote')
-  .addParam('contract', 'Ballot contract address')
-  .addParam('signer', 'Signer public address')
-  .addParam('proposal', 'Proposal index')
-  .setAction(vote)
-
-task('winning-proposal', 'Give the name of the winner and total vote')
-  .addParam('contract', 'Ballot contract address')
-  .setAction(winningProposal)
 
 export default config
