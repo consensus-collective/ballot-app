@@ -1,4 +1,4 @@
-import { HardhatUserConfig } from 'hardhat/config'
+import { HardhatUserConfig, task } from 'hardhat/config'
 import '@nomicfoundation/hardhat-ethers'
 import '@nomicfoundation/hardhat-toolbox'
 import '@nomicfoundation/hardhat-chai-matchers'
@@ -120,5 +120,27 @@ if (process.env.ACCOUNT_PRIVATE_KEYS) {
 config.gasReporter = {
   enabled: process.env.REPORT_GAS ? true : false,
 }
+
+task('winning-proposal', 'Give the name of the winner and total vote')
+  .addParam('contract', 'Ballot contract address')
+  .setAction(async (_arg, { ethers }) => {
+    const contractAddress = _arg['contract']
+    const contract = await ethers.getContractAt('Ballot', contractAddress)
+    const winningProposal = await contract.winningProposal().then((idx) => contract.proposals(idx))
+
+    if (winningProposal.voteCount <= 0n) {
+      return console.log('Winner: none')
+    }
+
+    console.log('Winner:', ethers.decodeBytes32String(winningProposal.name))
+    console.log('Total Count:', winningProposal.voteCount.toString())
+  })
+
+task('accounts', 'Get account list').setAction(async (_arg, { ethers }) => {
+  const accounts = await ethers.getSigners()
+  for (const account of accounts) {
+    console.log(account.address)
+  }
+})
 
 export default config

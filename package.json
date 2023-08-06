@@ -52,6 +52,7 @@
     "compile": "hardhat compile",
     "pretest": "yarn compile",
     "test": "hardhat test",
+    "format": "prettier --write .",
     "test:parallel": "hardhat test --parallel",
     "test:bail": "hardhat test --bail --parallel",
     "size": "hardhat size-contracts",
