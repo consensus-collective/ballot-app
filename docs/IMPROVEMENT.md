@@ -43,6 +43,7 @@ it('shd be able to mass give right', async function () {
   await expect(receipt?.logs.length).to.equal(userArr.length)
 })
 ```
+tx: https://sepolia.etherscan.io/tx/0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea
 
 ### 3. Add getter for proposals length
 
@@ -53,4 +54,4 @@ it('shd be able to mass give right', async function () {
    }
 ```
 
-tx: https://sepolia.etherscan.io/tx/0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea
+
