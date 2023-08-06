@@ -10,6 +10,8 @@ Contract Address: [0x003343f128839fe6253Ab3E15265aA60E8114DeF](https://sepolia.e
 ``Voter 1 Address``: [0xd22c7a03d8a7f55916a1df0ae3840b82b46216ae](https://sepolia.etherscan.io/address/0xd22c7a03d8a7f55916a1df0ae3840b82b46216ae)
 
 ___
+- Then, the **chairman** gives the **voter 1** a right to vote and **succeeded** ([0xf9181dc4cfc1a63c5a504af6ec362c5303f86258191ac085e1832b5cb33487aa](https://sepolia.etherscan.io/tx/0xf9181dc4cfc1a63c5a504af6ec362c5303f86258191ac085e1832b5cb33487aa)).
+![0xf9181dc4cfc1a63c5a504af6ec362c5303f86258191ac085e1832b5cb33487aa](./assets/vote-right.png)
 
 - An attacker (**the fake chairman**) trying to give the **voter 1** a right to vote, but **rejected** because only the chairman that has a right ([0x9836a381fc6494c13513ec15cfce1f0ac2f3db7da885bc0405cb29f2d3fc2291](https://sepolia.etherscan.io/tx/0x9836a381fc6494c13513ec15cfce1f0ac2f3db7da885bc0405cb29f2d3fc2291)). 
 ![0x9836a381fc6494c13513ec15cfce1f0ac2f3db7da885bc0405cb29f2d3fc2291](./assets/failed-vote-right.png)
