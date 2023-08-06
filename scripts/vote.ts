@@ -10,9 +10,9 @@ interface Argument {
 export async function vote(args: Argument, hre: HardhatRuntimeEnvironment) {
   const signer = await hre.ethers.getSigner(args.signer)
   const contractAddress = args.contract
-  const proposalIndex = args.proposal
+  const proposalIndex = BigInt(args.proposal)
 
-  const contract = await hre.ethers.getContractAt('Ballot', contractAddress, signer)
+  const contract = await hre.ethers.getContractAt('Ballot2', contractAddress, signer)
   const proposal = await contract.proposals(proposalIndex)
 
   console.log('Account', signer.address, 'is giving vote to', hre.ethers.decodeBytes32String(proposal.name))

@@ -1,27 +1,64 @@
 import { task } from 'hardhat/config'
+import { vote } from '../scripts/vote'
+import { winningProposal } from '../scripts/query'
 import { HardhatRuntimeEnvironment } from 'hardhat/types'
-import { giveRight } from '../scripts'
+import { readFile } from '../utils/file'
 import { ethers } from 'ethers'
+import { giveRight } from '../scripts'
+import { getDeployments } from '../scripts/utils'
 import log from '../utils/log'
+
+task('vote', 'Give vote')
+  .addParam('contract', 'Ballot contract address')
+  .addParam('signer', 'Signer public address')
+  .addParam('proposal', 'Proposal index')
+  .setAction(vote)
+
+task('winning-proposal', 'Give the name of the winner and total vote')
+  .addParam('contract', 'Ballot contract address')
+  .setAction(winningProposal)
 
 task('giveRight', 'give voting right to a specific address')
   .addOptionalParam('contract', 'Ballet contract address')
-  .addVariadicPositionalParam('voter', 'Voter address to give right')
+  .addOptionalParam('path', 'json file path')
+  .addOptionalParam('name', 'custom contract name')
+  .addOptionalVariadicPositionalParam('voter', 'Voter address to give right')
   .setAction(async (taskArgs, hre: HardhatRuntimeEnvironment) => {
-    let contractAddress = ''
-    if (!taskArgs.contract) {
-      const { deployments } = hre
-      const deployment = await deployments.get('Ballot')
-      contractAddress = deployment.address
-    } else {
-      contractAddress = taskArgs.contract
-    }
+    // if --contract is not input, get it from deployments
+    const contractAddress = taskArgs.contract ?? (await getDeployments(hre, taskArgs.name ?? 'Ballot'))
+
     if (!contractAddress || !ethers.isAddress(contractAddress)) {
       log.error(`Invalid contract address`)
       return
     }
 
-    for (const i of taskArgs.voter) {
+    let addressToGrant: string[] = []
+    // Loop from input array
+    if (taskArgs.voter) {
+      addressToGrant = taskArgs.voter
+    }
+    // Loop from JSON file
+    else if (taskArgs.path) {
+      const addressJson = await readFile(taskArgs.path)
+
+      if (!addressJson) {
+        console.log('Invalid JSON.')
+        return undefined
+      }
+      const addressList: string[] = []
+
+      JSON.parse(addressJson).map((address: string) => {
+        addressList.push(address)
+      })
+      addressToGrant = addressList
+    }
+    // not found
+    else {
+      log.error('File path or address not found')
+      return
+    }
+
+    for (const i of addressToGrant) {
       if (!ethers.isAddress(i)) {
         log.error(`${i} is not a valid address`)
         continue
