@@ -1,0 +1,22 @@
+Group member list:
+┌─────────┬──────────────────────────────────────────────┬───────────┬─────────────┐
+│ (index) │                   address                    │   name    │  discordId  │
+├─────────┼──────────────────────────────────────────────┼───────────┼─────────────┤
+│    0    │ '0x2f53edad37fa7fc72e193d6d708065bb9f38f4c2' │ 'Sergey'  │  'invisea'  │
+│    1    │ '0xb66c6d8d96faa683a4eb2cb4b854f7bb2295e01e' │ 'Corey S' │ 'debuggy69' │
+└─────────┴──────────────────────────────────────────────┴───────────┴─────────────┘
+[object Object],[object Object]
+
+EventLogs for contract 0x3975D8F35b9B805A3B05605F54ea6a615f2D4599:
+┌─────────┬───────────┬─────────────────┬─────────────────────────────────────────────────────────┬──────────────────────────────────────────────────────────────────────┬────────┐
+│ (index) │  sender   │      event      │                          args                           │                               txnHash                                │ logIdx │
+├─────────┼───────────┼─────────────────┼─────────────────────────────────────────────────────────┼──────────────────────────────────────────────────────────────────────┼────────┤
+│    0    │ 'Corey S' │ 'GiveVoteRight' │ [ 'voter: 0xc6ffcA45d451f28754A81D10826f2ACDF171D9C5' ] │ '0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea' │  145   │
+│    1    │ 'Corey S' │ 'GiveVoteRight' │ [ 'voter: 0x265832C44f412013702761b9bC657CFBCd4cE69a' ] │ '0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea' │  146   │
+│    2    │ 'Corey S' │ 'GiveVoteRight' │ [ 'voter: 0x33Cb9c62131915C86DFfCb5C853379865Ae7379d' ] │ '0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea' │  147   │
+│    3    │ 'Corey S' │ 'GiveVoteRight' │                   [ 'voter: Sergey' ]                   │ '0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea' │  148   │
+│    4    │ 'Corey S' │ 'GiveVoteRight' │ [ 'voter: 0xD22C7a03d8a7f55916A1DF0ae3840B82B46216ae' ] │ '0xe12a7255da2275056462d21c1400e7a851f38c3eb2ea02affd12e4d470aee0ea' │  149   │
+│    5    │ 'Corey S' │     'Vote'      │          [ 'voter: Corey S', 'proposalId: 1' ]          │ '0x85dd94ad360437bee6b84c1247175cb96b499b3b53d661ed3e0ccfc2cb50c51d' │  200   │
+└─────────┴───────────┴─────────────────┴─────────────────────────────────────────────────────────┴──────────────────────────────────────────────────────────────────────┴────────┘
+[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]
+[2023-08-07 10:48:37]  Table stored in sergey.txt
